@@ -15,9 +15,23 @@
 # limitations under the License.
 #
 
-$(call inherit-product, device/xiaomi/kenzo/full_kenzo.mk)
 
-# Inherit some common inv stuff.
+
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+
+# Inherit from kipper device
+$(call inherit-product, device/xiaomi/kenzo/device.mk)
+
+#Boot Animation
+TARGET_SCREEN_HEIGHT := 1920
+TARGET_SCREEN_WIDTH := 1080
+
+# Inherit Carbon GSM telephony parts
+$(call inherit-product, vendor/carbon/config/gsm.mk)
+
+# Inherit some common carbon stuff.
 $(call inherit-product, vendor/carbon/config/common.mk)
 
 # Set those variables here to overwrite the inherited values.
@@ -37,3 +51,7 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     BUILD_FINGERPRINT=Xiaomi/kenzo/kenzo:6.0.1/MMB29M/V8.2.1.0.MHOCNDL:user/release-keys \
     PRIVATE_BUILD_DESC="kenzo-user 6.0.1 MMB29M V8.2.1.0.MHOCNDL release-keys"
 endif
+
+
+
+
